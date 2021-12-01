@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container, Header, Grid, Message, Icon } from 'semantic-ui-react'
-import { ERROR_STATUS } from './constants/general';
+import { ERROR_STATUS, CITY_SIDE_A, CITY_SIDE_B } from './constants/general';
 import CityView from './features/cityView/CityView';
 import { fetchAllParameters } from './features/parameters/parametersSlice';
 
@@ -26,10 +26,10 @@ class App extends PureComponent {
         <Grid textAlign="center">
           <Grid.Row>
             <Grid.Column width={8}>
-              <CityView />
+              <CityView citySide={CITY_SIDE_A} />
             </Grid.Column>
             <Grid.Column width={8}>
-              <CityView />
+              <CityView citySide={CITY_SIDE_B} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
