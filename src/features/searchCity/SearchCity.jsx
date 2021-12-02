@@ -44,7 +44,11 @@ class SearchCity extends PureComponent {
         return (
             <>
                 <div>
-                    <Input error={this.state.isError || isBackendError ? true : false} placeholder='City...' onChange={this.handleCityInputChange} />
+                    <Input
+                        error={this.state.isError || isBackendError ? true : false}
+                        placeholder='City...'
+                        onChange={this.handleCityInputChange}
+                    />
                     <Button attached="right" onClick={this.handleSearchSubmit} >Search</Button>
                 </div>
                 {this.state.isError && (
