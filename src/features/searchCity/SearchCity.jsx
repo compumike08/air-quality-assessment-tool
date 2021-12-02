@@ -21,7 +21,7 @@ class SearchCity extends PureComponent {
         });
     }
 
-    handleSearchSubmit = (_event, data) => {
+    handleSearchSubmit = () => {
         this.setState({
             isError: false
         });
