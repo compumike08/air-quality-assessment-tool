@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container, Header, Grid, Message } from 'semantic-ui-react'
+import { Container, Header, Grid, Message, Button } from 'semantic-ui-react'
 import { ERROR_STATUS, CITY_SIDE_A, CITY_SIDE_B } from './constants/general';
 import CityView from './features/cityView/CityView';
 import { fetchAllParameters } from './features/parameters/parametersSlice';
@@ -10,9 +10,22 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
 class App extends PureComponent {
+  constructor(props){
+    super(props);
+    this.state = {
+      isRawData: true
+    };
+  }
+
   componentDidMount() {
     this.props.actions.fetchAllParameters();
   }
+
+  handleToggleViewMode = isRawData => {
+    this.setState({
+      isRawData
+    });
+  };
 
   render() {
     return (
@@ -25,11 +38,20 @@ class App extends PureComponent {
         )}
         <Grid textAlign="center">
           <Grid.Row>
+            <Grid.Column>
+              <Button.Group>
+                <Button positive={this.state.isRawData} onClick={()=> this.handleToggleViewMode(true)} >Raw Data</Button>
+                <Button.Or />
+                <Button positive={!this.state.isRawData} onClick={() => this.handleToggleViewMode(false)} >Averages</Button>
+              </Button.Group>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
             <Grid.Column width={8}>
-              <CityView citySide={CITY_SIDE_A} />
+              <CityView isRawDataView={this.state.isRawData} citySide={CITY_SIDE_A} />
             </Grid.Column>
             <Grid.Column width={8}>
-              <CityView citySide={CITY_SIDE_B} />
+              <CityView isRawDataView={this.state.isRawData} citySide={CITY_SIDE_B} />
             </Grid.Column>
           </Grid.Row>
         </Grid>

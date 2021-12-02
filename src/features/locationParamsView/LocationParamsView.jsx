@@ -6,13 +6,13 @@ import { Table, Popup, Icon } from 'semantic-ui-react'
 class LocationParamsView extends PureComponent {
     render() {
         const parameterTableRows = this.props.measurements.map(measurement => {
-            const parameterType = this.props.parameters.find(param => param.name === measurement.parameter);
+            const parameterType = this.props.parameters.find(param => param.name === measurement.parameter && measurement.unit === param.preferredUnit);
             return (
-                <Table.Row key={`table-row-${measurement.parameter}`}>
+                <Table.Row disabled={measurement.value === null} key={`table-row-${measurement.parameter}-${measurement.unit}`}>
                     <Table.Cell>
                         <Popup content={parameterType.description} trigger={<span><Icon link name="info circle" />{parameterType.displayName}</span>} />
                     </Table.Cell>
-                    <Table.Cell>{measurement.value}</Table.Cell>
+                    <Table.Cell>{measurement.value === null ? 'No value' : measurement.value}</Table.Cell>
                     <Table.Cell>{measurement.unit}</Table.Cell>
                 </Table.Row>
             );
@@ -37,11 +37,9 @@ class LocationParamsView extends PureComponent {
 }
 
 LocationParamsView.propTypes = {
-    location: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
     measurements: PropTypes.arrayOf(PropTypes.shape({
         parameter: PropTypes.string.isRequired,
-        value: PropTypes.number.isRequired,
+        value: PropTypes.number,
         unit: PropTypes.string.isRequired
     }))
 };
