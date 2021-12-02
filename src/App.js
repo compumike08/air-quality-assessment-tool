@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container, Header, Grid, Message, Icon } from 'semantic-ui-react'
+import { Container, Header, Grid, Message } from 'semantic-ui-react'
 import { ERROR_STATUS, CITY_SIDE_A, CITY_SIDE_B } from './constants/general';
 import CityView from './features/cityView/CityView';
 import { fetchAllParameters } from './features/parameters/parametersSlice';

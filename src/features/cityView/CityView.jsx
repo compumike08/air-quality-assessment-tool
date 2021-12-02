@@ -10,7 +10,7 @@ class CityView extends PureComponent {
     render() {
         const panels = this.props.cityData.map(data => ({
             key: `panel-${data.location}`,
-            title: `TEST ${data.location}`,
+            title: data.location,
             content: {
                 content: (
                     <LocationParamsView
@@ -47,7 +47,6 @@ CityView.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-      parameters: state.parametersData.parameters,
       cityData: ownProps.citySide === CITY_SIDE_A ? state.cityView.cityAResults : state.cityView.cityBResults
     };
   }
