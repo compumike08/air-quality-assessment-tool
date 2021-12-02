@@ -5,6 +5,7 @@ import { Container, Header, Grid, Message, Button } from 'semantic-ui-react'
 import { ERROR_STATUS, CITY_SIDE_A, CITY_SIDE_B } from './constants/general';
 import CityView from './features/cityView/CityView';
 import { fetchAllParameters } from './features/parameters/parametersSlice';
+import { fetchAllCountries } from './features/countries/countriesSlice';
 
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
@@ -19,6 +20,7 @@ class App extends PureComponent {
 
   componentDidMount() {
     this.props.actions.fetchAllParameters();
+    this.props.actions.fetchAllCountries();
   }
 
   handleToggleViewMode = isRawData => {
@@ -34,6 +36,11 @@ class App extends PureComponent {
         {this.props.parametersLoadingStatus === ERROR_STATUS && (
           <Message negative>
             <Message.Header>Unable to load sensor parameters list</Message.Header>
+          </Message>
+        )}
+        {this.props.countriesLoadingStatus === ERROR_STATUS && (
+          <Message negative>
+            <Message.Header>Unable to load countries list</Message.Header>
           </Message>
         )}
         <Grid textAlign="center">
@@ -62,13 +69,17 @@ class App extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    parametersLoadingStatus: state.parametersData.status
+    parametersLoadingStatus: state.parametersData.status,
+    countriesLoadingStatus: state.countriesData.status
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ fetchAllParameters }, dispatch)
+    actions: bindActionCreators({
+      fetchAllParameters,
+      fetchAllCountries
+    }, dispatch)
   };
 }
 
