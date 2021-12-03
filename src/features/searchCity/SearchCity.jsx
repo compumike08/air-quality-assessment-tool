@@ -27,12 +27,12 @@ class SearchCity extends PureComponent {
     };
 
     handleCountrySearchChange = (_event, data) => {
-        const searchTerm = data.value;
+        const searchTerm = data.value.toUpperCase();
         this.setState({
-            countrySearchText: searchTerm
+            countrySearchText: data.value
         });
 
-        const results = this.props.countries.filter(country => country.name.includes(searchTerm));
+        const results = this.props.countries.filter(country => country.name.toUpperCase().startsWith(searchTerm));
 
         this.setState({
             countrySearchResults: results.map(result => ({ title: result.name})),
