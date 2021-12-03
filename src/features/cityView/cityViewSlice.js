@@ -11,15 +11,15 @@ const initialState = {
 
 export const fetchCityAMeasurements = createAsyncThunk(
     'cityView/cityA/fetchLatestMeasurements',
-    async (citySearchText) => {
-      return await fetchLatestMeasurementsForCity(citySearchText);
+    async (searchData) => {
+      return await fetchLatestMeasurementsForCity(searchData.citySearchText, searchData.countryCode);
     }
   );
 
 export const fetchCityBMeasurements = createAsyncThunk(
     'cityView/cityB/fetchLatestMeasurements',
-    async (citySearchText) => {
-      return await fetchLatestMeasurementsForCity(citySearchText);
+    async (searchData) => {
+      return await fetchLatestMeasurementsForCity(searchData.citySearchText, searchData.countryCode);
     }
   );
 
